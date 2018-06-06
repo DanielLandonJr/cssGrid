@@ -1,0 +1,98 @@
+body, html {
+  box-sizing: border-box;
+}
+
+/* select all tags that have a class of wrapper */
+[class|="wrapper"] > div {
+  background: #eee;
+  padding: 1rem;
+}
+
+[class|="wrapper"] > div:nth-child(odd) {
+  background: #ddd;
+}
+
+.wrapper-1 {
+  display: grid;
+  grid-column-gap: 1rem; /* gap between colums */
+  grid-row-gap: .5rem; /* gap between rows */
+  /* grid-gap: 1rem; applies same gap size both column/row */
+
+  /* this applies to all rows inside the wrapper */
+  grid-template-columns: 70% 30%; /* 70/30 split regardless of screen size */
+}
+
+.wrapper-2 {
+  display: grid;
+  grid-gap: .5rem;
+  /* fr represents fractional...so 1fr means one fraction out of the total, the more fr (2fr, 3fr, etc) the larger the box or portion of column */
+  /* grid-template-columns: 1fr 1fr; */
+  /* will repeat 1fr 6 time */
+  /* grid-template-columns: repeat(6, 1fr); */
+  /* will repeat 1fr 2fr 3 times */
+  /* grid-template-columns: repeat(3, 1fr 2fr);  */
+  grid-template-columns: repeat(3, 1fr);
+
+  /* fixed height, content will flow outside of box if larger than size indicated */
+  grid-auto-rows: 100px;
+  /* fixed height, box will default to size indicated. if content is larger then box will resize to contain */
+  grid-auto-rows: minmax(100px, auto);
+}
+
+.nested {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-auto-rows: 70px;
+  grid-gap: .5rem;
+}
+
+.nested > div {
+  border: 1px solid black;
+  padding: 1rem;
+}
+
+.wrapper-3 {
+  display: grid;
+  grid-template-columns: 1fr 2fr 1fr;
+  grid-auto-rows: minmax(100px, auto);
+  grid-gap: 0.5rem;
+  /* will position item at location indicated (left to right), start, end, center, stretch(default) */
+  justify-items: stretch;
+  /* will position item at location indicated (top to bottom), start, end, center, stretch(default) */
+  align-items: stretch;
+}
+
+/* -self, either align or justify, effects individual items */
+
+/* lines, one exists at the very left/top and one to the very right/bottom. a line also exists between each item. If you have 3 items to a column and two rows you would have 4 lines going left to right and 3 lines going top to bottom */
+
+/* lines can also be used to change the position of an item, see box3 */
+.box1 {
+  /* align-self: start; */
+
+  /* this will stretch (or span) the box so that it goes from line one to line 3 in the column while the second one goes from 1 to 3 in the row */
+  grid-column: 1/3;
+
+  grid-row: 1/3;
+}
+
+.box2 {
+  /* align-self: end; */
+  grid-column: 3;
+  grid-row: 1/3;
+}
+
+.box3 {
+  /* justify-self: end; */
+  grid-column: 2/4;
+  grid-row: 3;
+}
+
+.box4 {
+  /* justify-self: center; */
+
+  /* using the line you can also overlap objects as well */
+  grid-column: 1;
+  grid-row: 2/4;
+  border: 2px solid black;
+}
